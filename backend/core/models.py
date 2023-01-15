@@ -22,15 +22,16 @@ class Chat(models.Model):
     CHAT_TYPES = [
     (1, 'PRIVATE'),
     (2, 'GROUP'),
-    (3, 'COMMUNITY')]
-
-    name = models.CharField(max_length=255, default='Group')
+    # (3, 'COMMUNITY')
+    ]
+    name = models.CharField(max_length=255, default='Chat')
     adminProfiles = models.ManyToManyField(Profile, related_name='adminInTheChats')
     participants = models.ManyToManyField(Profile, related_name='participateInTheChats')
-    chatType = models.IntegerField(choices=CHAT_TYPES, default=1)
+    chatType = models.IntegerField(choices=CHAT_TYPES)
     # thumbnail
 
 class Message(models.Model):
+    #Change m2m for messages at chat
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='messages')
     chat = models.ManyToManyField(Chat, related_name='messages')
     text = models.TextField()

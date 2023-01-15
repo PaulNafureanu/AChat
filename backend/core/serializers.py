@@ -39,3 +39,17 @@ class MyProfileSerializer(serializers.ModelSerializer):
         fields = ['userId', 'name', 'about', 'friendshipRequestsSent', 'friendshipRequestsReceived', 'friends', 'restrictedProfiles', 'activeChats', 'archivedChats']
 
 
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = ['id','name', 'chatType'] # add thumbnail
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['profile','chat','text']
+
+class MessageDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['profile', 'chat', 'text', 'sendTime', 'readBy', 'readTime', 'deliveredTo', 'deliveredTime', 'starredBy', 'deleted']
